@@ -66,7 +66,7 @@ const remove: Controller = (req, res) => {
 
 const update: Controller = (req, res) => {
   const { id } = req.params;
-  const { text, colorId } = req.body;
+  const { text, colorId, highlighted } = req.body;
 
   const noteToUpdate = notesServices.findById(id as UUID);
   const color = colorsServices.findById(colorId);
@@ -86,7 +86,7 @@ const update: Controller = (req, res) => {
     return;
   }
 
-  notesServices.update(noteToUpdate, { text, colorId });
+  notesServices.update(noteToUpdate, { text, colorId, highlighted });
 
   res.status(204).send(noteToUpdate);
 };

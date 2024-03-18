@@ -5,4 +5,5 @@ export interface Note {
   text: string,
   date: string,
   colorId: number,
+  highlighted: boolean,
 }

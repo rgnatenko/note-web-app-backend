@@ -6,7 +6,8 @@ import { createNoteDate } from '../helpers/createNoteDate';
 
 export let notes: Note[] = [];
 
-type Options = Pick<Note, 'colorId' | 'text'>;
+type CreateOptions = Pick<Note, 'colorId' | 'text'>;
+type UpdateOptions = Pick<Note, 'colorId' | 'text' | 'highlighted'>;
 
 const findAll = () => notes;
 
@@ -14,11 +15,16 @@ const findById = (id: UUID) => {
   return notes.find(note => note.id === id);
 };
 
-const create = (options: Options) => {
+const create = (options: CreateOptions) => {
   const newNoteId = randomUUID();
   const newNoteDate = createNoteDate(new Date());
 
-  const newNote = { ...options, id: newNoteId, date: newNoteDate };
+  const newNote = {
+    ...options,
+    id: newNoteId,
+    date: newNoteDate,
+    highlighted: false
+  };
 
   notes = [...notes, newNote];
 
@@ -29,7 +35,7 @@ const remove = (id: UUID) => {
   notes = notes.filter(note => note.id !== id);
 };
 
-const update = (note: Note, options: Options) => {
+const update = (note: Note, options: UpdateOptions) => {
   const updatedNoteDate = note.date !== createNoteDate(new Date())
     ? createNoteDate(new Date())
     : note.date;

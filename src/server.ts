@@ -1,13 +1,15 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import { router as notesRouter } from './notes/note.routes';
 import { router as colorsRouter } from './colors/color.routes';
-const PORT = 5000;
-const CLIENT_URL = 'http://localhost:3000';
+
+dotenv.config();
+
 const app = express();
 
 app.use(cors({
-  origin: CLIENT_URL
+  origin: process.env.CLIENT_URL
 }));
 
 app.use(express.json());
@@ -15,6 +17,6 @@ app.use(express.json());
 app.use('/notes', notesRouter);
 app.use('/colors', colorsRouter);
 
-app.listen(5000, () => {
-  console.log(`Server is listening on port ${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is listening on port ${process.env.PORT}`);
 });

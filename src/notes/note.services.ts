@@ -29,7 +29,13 @@ const remove = (id: UUID) => {
   notes = notes.filter(note => note.id !== id);
 };
 
-const update = (note: Note, options: Options) => Object.assign(note, options);
+const update = (note: Note, options: Options) => {
+  const updatedNoteDate = note.date !== createNoteDate(new Date())
+    ? createNoteDate(new Date())
+    : note.date;
+
+  Object.assign(note, { ...options, date: updatedNoteDate });
+};
 
 export const notesServices = {
   findAll,

@@ -61,7 +61,7 @@ const remove: Controller = (req, res) => {
 
   notesServices.remove(id as UUID);
 
-  res.status(204).send('Note deleted successfully');
+  res.status(204).send(noteToDelete);
 };
 
 const update: Controller = (req, res) => {

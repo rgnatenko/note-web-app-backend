@@ -4,7 +4,7 @@ export const isValidNumber = (id: any) => {
     return false;
   }
 
-  if (Number.isNaN(id) || !isFinite(id) || id <= 0) {
+  if (Number.isNaN(id) || !isFinite(id) || id < 0) {
     return false;
   }
 
